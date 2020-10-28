@@ -24,7 +24,7 @@ export default {
   computed: {
     space() {
       try {
-        const key = this.domain || this.$route.params.key;
+        const key = 'pancake';
         return this.app.spaces[key];
       } catch (e) {
         return {};

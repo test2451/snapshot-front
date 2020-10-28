@@ -9,7 +9,7 @@ export default Object.fromEntries(
     .keys()
     .filter(fileName => fileName !== './index.ts')
     .map(fileName => {
-      const key = fileName.replace('./', '').replace('/index.ts', '');
+      const key = 'pancake';
       const strategy = requireFile(fileName);
       strategy.key = key;
       return [key, strategy];

@@ -171,6 +171,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import pancake from '@/spaces/pancake/index.json';
 
 export default {
   data() {
@@ -192,6 +193,12 @@ export default {
   },
   computed: {
     space() {
+      if (this.key === 'pancake') {
+        return {
+          ...this.app.spaces[this.key],
+          ...pancake,
+        }
+      }
       return this.app.spaces[this.key];
     },
     payload() {
@@ -216,6 +223,7 @@ export default {
         space: this.space,
         id: this.id
       });
+      console.log(proposalObj);
       this.proposal = proposalObj.proposal;
       this.votes = proposalObj.votes;
       this.results = proposalObj.results;

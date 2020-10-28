@@ -12,14 +12,14 @@
         <div class="d-flex flex-items-center" style="height: 78px;">
           <div class="flex-auto d-flex flex-items-center">
             <router-link
-              :to="{ name: 'home' }"
+              :to="{ name: 'proposals' }"
               class="d-inline-block d-flex flex-items-center"
               style="font-size: 24px; padding-top: 4px;"
             >
               <span
                 :class="space && 'hide-sm'"
                 class="mr-1"
-                v-text="'snapshot'"
+                v-text="'SyrupVote'"
               />
               <span v-if="space" class="pl-1 pr-2 text-gray" v-text="'/'" />
             </router-link>
@@ -90,7 +90,7 @@ export default {
   },
   computed: {
     space() {
-      const key = this.domain || this.$route.params.key;
+      const key = 'pancake';
       return this.app.spaces[key] ? this.app.spaces[key] : false;
     }
   },

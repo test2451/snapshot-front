@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     key() {
-      return this.domain || this.$route.params.key;
+      return 'pancake';
     },
     space() {
       return this.app.spaces[this.key];
