@@ -58,7 +58,9 @@
                 @click="modalNetworksOpen = true"
                 class="text-left width-full mb-2"
               >
-                Select network
+                {{
+                  form.network ? networks[form.network].name : 'Select network'
+                }}
               </UiButton>
               <UiButton class="width-full mb-2">
                 <input
@@ -97,7 +99,8 @@
           </Block>
           <Block title="Members">
             <UiButton class="d-block width-full" style="height: auto;">
-              <textarea-autosize
+              <TextareaArray
+                :value="form.members"
                 v-model="form.members"
                 :placeholder="
                   `0x8C28Cf33d9Fd3D0293f963b1cd27e3FF422B425c\n0xeF8305E140ac520225DAf050e2f71d5fBcC543e7`
@@ -131,7 +134,8 @@
                 />
               </UiButton>
               <UiButton class="d-block width-full" style="height: auto;">
-                <textarea-autosize
+                <TextareaArray
+                  :value="form.filters.invalids"
                   v-model="form.filters.invalids"
                   :placeholder="
                     `Qmc4VSHwY3SVmo4oofhL2qDPaYcGaQqndM4oqdQQe2aZHQ\nQmTMAgnPy2q6LRMNwvj27PHvWEgZ3bw7yTtNNEucBZCWhZ`
@@ -162,8 +166,13 @@
     <ModalNetworks
       :open="modalNetworksOpen"
       @close="modalNetworksOpen = false"
+      v-model="form.network"
     />
-    <ModalSkins :open="modalSkinsOpen" @close="modalSkinsOpen = false" />
+    <ModalSkins
+      :open="modalSkinsOpen"
+      @close="modalSkinsOpen = false"
+      v-model="form.skin"
+    />
   </Container>
 </template>
 
@@ -173,6 +182,8 @@ import { getAddress } from '@ethersproject/address';
 import { resolveContent } from '@/helpers/web3';
 import getProvider from '@/helpers/provider';
 import ipfs from '@/helpers/ipfs';
+import { clone } from '@/helpers/utils';
+import networks from '@/helpers/networks.json';
 
 export default {
   data() {
@@ -187,7 +198,8 @@ export default {
       loading: false,
       form: {
         filters: {}
-      }
+      },
+      networks
     };
   },
   computed: {
@@ -212,15 +224,11 @@ export default {
       this.space.key = this.key;
       this.space.token = this.key;
       this.space.filters = this.space.filters || {};
-      if (this.space.members)
-        this.space.members = this.space.members.join('\n');
-      if (this.space.filters.invalids)
-        this.space.invalids = this.space.filters.invalids.join('\n');
       this.form = this.space;
     } catch (e) {
       console.log(e);
     }
-    if (this.from) this.form = this.app.spaces[this.from];
+    if (this.from) this.form = clone(this.app.spaces[this.from]);
     this.loaded = true;
   },
   methods: {
