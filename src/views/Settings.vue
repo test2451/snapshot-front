@@ -179,11 +179,11 @@
 <script>
 import { mapActions } from 'vuex';
 import { getAddress } from '@ethersproject/address';
+import networks from '@snapshot-labs/snapshot.js/src/networks.json';
 import { resolveContent } from '@/helpers/web3';
 import getProvider from '@/helpers/provider';
 import ipfs from '@/helpers/ipfs';
 import { clone } from '@/helpers/utils';
-import networks from '@/helpers/networks.json';
 
 export default {
   data() {
@@ -222,7 +222,6 @@ export default {
       this.currentContenthash = `${protocolType}://${decoded}`;
       this.space = await ipfs.get(decoded, protocolType);
       this.space.key = this.key;
-      this.space.token = this.key;
       this.space.filters = this.space.filters || {};
       this.form = this.space;
     } catch (e) {

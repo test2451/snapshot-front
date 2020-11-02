@@ -43,7 +43,6 @@
             :key="i"
             :proposal="proposal"
             :space="space"
-            :token="key"
             :verified="space.verified"
             :i="i"
           />
@@ -142,7 +141,9 @@ export default {
   async created() {
     this.loading = true;
     this.selectedState =
-      this.$route.params.tab || this.space.filters.defaultTab;
+      this.$route.params.tab ||
+      this.space.filters.defaultTab ||
+      this.selectedState;
     this.proposals = await this.getProposals(this.space);
     this.loading = false;
     this.loaded = true;
