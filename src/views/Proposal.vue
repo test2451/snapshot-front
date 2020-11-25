@@ -42,10 +42,13 @@
                 :aria-label="
                   `Target address: ${
                     payload.metadata.plugins.aragon[`choice${i + 1}`].actions[0]
-                      .targetAddress
-                  }\nCalldata: ${
+                      .to
+                  }\nValue: ${
                     payload.metadata.plugins.aragon[`choice${i + 1}`].actions[0]
-                      .calldata
+                      .value
+                  }\nData: ${
+                    payload.metadata.plugins.aragon[`choice${i + 1}`].actions[0]
+                      .data
                   }`
                 "
                 class="tooltipped tooltipped-n break-word"
@@ -145,27 +148,40 @@
           :results="results"
           :votes="votes"
         />
+        <BlockActions
+          :id="id"
+          :space="space"
+          :payload="payload"
+          :results="results"
+        />
+        <PluginGnosisBlock
+          v-if="_get(payload, 'metadata.plugins.gnosis.baseTokenAddress')"
+          :proposalConfig="payload.metadata.plugins.gnosis"
+          :choices="payload.choices"
+        />
       </div>
     </div>
-    <ModalConfirm
-      v-if="loaded"
-      :open="modalOpen"
-      @close="modalOpen = false"
-      @reload="loadProposal"
-      :space="space"
-      :proposal="proposal"
-      :id="id"
-      :selectedChoice="selectedChoice"
-      :totalScore="totalScore"
-      :scores="scores"
-      :snapshot="payload.snapshot"
-    />
-    <ModalStrategies
-      :open="modalStrategiesOpen"
-      @close="modalStrategiesOpen = false"
-      :space="space"
-      :strategies="space.strategies"
-    />
+    <portal to="modal">
+      <ModalConfirm
+        v-if="loaded"
+        :open="modalOpen"
+        @close="modalOpen = false"
+        @reload="loadProposal"
+        :space="space"
+        :proposal="proposal"
+        :id="id"
+        :selectedChoice="selectedChoice"
+        :totalScore="totalScore"
+        :scores="scores"
+        :snapshot="payload.snapshot"
+      />
+      <ModalStrategies
+        :open="modalStrategiesOpen"
+        @close="modalStrategiesOpen = false"
+        :space="space"
+        :strategies="space.strategies"
+      />
+    </portal>
   </Container>
 </template>
 

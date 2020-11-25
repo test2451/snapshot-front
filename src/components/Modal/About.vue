@@ -21,8 +21,14 @@
     <div class="m-4 p-4 border rounded-2 text-white">
       <div class="d-flex">
         <span v-text="'Version'" class="flex-auto text-gray mr-1" />
-        {{ pkg.version
-        }}<span v-if="commitSha" v-text="`#${commitSha.slice(0, 7)}`" />
+        <a
+          v-if="commitSha"
+          :href="`https://github.com/${pkg.repository}/tree/${commitSha}`"
+          target="_blank"
+        >
+          {{ pkg.version }}#{{ commitSha.slice(0, 7) }}
+        </a>
+        <span v-else v-text="pkg.version" />
       </div>
       <div class="d-flex">
         <span v-text="'License'" class="flex-auto text-gray mr-1" />
@@ -30,7 +36,9 @@
       </div>
       <div class="d-flex">
         <span v-text="'Network'" class="flex-auto text-gray mr-1" />
-        {{ web3.network.network }} ({{ web3.network.key }})
+        <a :href="web3.network.explorer" target="_blank">
+          {{ web3.network.network }} ({{ web3.network.key }})
+        </a>
       </div>
       <div class="d-flex">
         <span v-text="'IPFS server'" class="flex-auto text-gray mr-1" />

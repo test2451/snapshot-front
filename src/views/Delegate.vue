@@ -18,7 +18,7 @@
               <input
                 v-model.trim="form.address"
                 class="input width-full"
-                placeholder="Delegate address"
+                placeholder="Delegate address or ENS name"
               />
             </UiButton>
             <UiButton class="width-full mb-2">
@@ -48,6 +48,12 @@
                 v-text="_shorten(delegate.space || '-', 'choice')"
                 class="flex-auto text-right text-white"
               />
+              <a
+                @click="clearDelegate(delegate.space, delegate.delegate)"
+                class="px-2 mr-n2 ml-2"
+              >
+                <Icon name="close" size="12" class="mb-1" />
+              </a>
             </div>
           </Block>
           <Block
@@ -86,6 +92,16 @@
         </Block>
       </div>
     </div>
+    <portal to="modal">
+      <ModalClearDelegate
+        v-if="loaded"
+        :open="modalOpen"
+        @close="modalOpen = false"
+        @reload="load"
+        :id="currentId"
+        :delegate="currentDelegate"
+      />
+    </portal>
   </Container>
 </template>
 
@@ -94,14 +110,21 @@ import { mapActions } from 'vuex';
 import { isAddress } from '@ethersproject/address';
 import { formatBytes32String } from '@ethersproject/strings';
 import { sendTransaction } from '@snapshot-labs/snapshot.js/src/utils';
+import getProvider from '@snapshot-labs/snapshot.js/src/utils/provider';
 import abi from '@/helpers/abi';
-import { getDelegates, getDelegators } from '@/helpers/delegation';
-
-const contractAddress = '0x469788fE6E9E9681C6ebF3bF78e7Fd26Fc015446';
+import {
+  getDelegates,
+  getDelegators,
+  contractAddress
+} from '@/helpers/delegation';
+import { sleep } from '@/helpers/utils';
 
 export default {
   data() {
     return {
+      modalOpen: false,
+      currentId: '',
+      currentDelegate: '',
       loaded: false,
       loading: false,
       delegates: [],
@@ -126,9 +149,12 @@ export default {
   },
   computed: {
     isValid() {
+      const address = this.form.address;
       return (
-        isAddress(this.form.address) &&
-        this.form.address.toLowerCase() !== this.web3.account.toLowerCase()
+        this.$auth.isAuthenticated &&
+        (address.includes('.eth') || isAddress(address)) &&
+        address.toLowerCase() !== this.web3.account.toLowerCase() &&
+        (this.form.id === '' || this.app.spaces[this.form.id])
       );
     }
   },
@@ -147,21 +173,30 @@ export default {
     async handleSubmit() {
       this.loading = true;
       try {
+        let address = this.form.address;
+        if (address.includes('.eth'))
+          address = await getProvider('1').resolveName(address);
         const tx = await sendTransaction(
           this.$auth.web3,
           contractAddress,
           abi['DelegateRegistry'],
           'setDelegate',
-          [formatBytes32String(this.form.id), this.form.address]
+          [formatBytes32String(this.form.id), address]
         );
         const receipt = await tx.wait();
         console.log('Receipt', receipt);
+        await sleep(3e3);
         this.notify('You did it!');
         await this.load();
       } catch (e) {
         console.log(e);
       }
       this.loading = false;
+    },
+    clearDelegate(id, delegate) {
+      this.currentId = id;
+      this.currentDelegate = delegate;
+      this.modalOpen = true;
     }
   }
 };
