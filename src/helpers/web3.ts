@@ -1,5 +1,8 @@
-import resolveENSContentHash from '@/helpers/resolveENSContentHash';
-import { decodeContenthash } from '@/helpers/content';
+import { bufferToHex } from 'ethereumjs-util';
+import {
+  resolveENSContentHash,
+  decodeContenthash
+} from '@snapshot-labs/snapshot.js/src/utils/contentHash';
 
 export async function resolveContent(provider, name) {
   const contentHash = await resolveENSContentHash(name, provider);
@@ -7,6 +10,7 @@ export async function resolveContent(provider, name) {
 }
 
 export async function signMessage(web3, msg, address) {
+  msg = bufferToHex(new Buffer(msg, 'utf8'));
   return await web3.send('personal_sign', [msg, address]);
 }
 

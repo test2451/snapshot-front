@@ -1,16 +1,18 @@
 import Vue from 'vue';
 import { getInstance } from '@snapshot-labs/lock/plugins/vue';
-import { getScores } from '@snapshot-labs/snapshot.js/src/utils';
+import { ipfsGet, getScores } from '@snapshot-labs/snapshot.js/src/utils';
+import getProvider from '@snapshot-labs/snapshot.js/src/utils/provider';
 import client from '@/helpers/client';
-import ipfs from '@/helpers/ipfs';
-import getProvider from '@/helpers/provider';
 import { formatProposal, formatProposals, formatSpace } from '@/helpers/utils';
 import { getBlockNumber, signMessage } from '@/helpers/web3';
 import { version } from '@/../package.json';
 
+const ipfsNode = process.env.VUE_APP_IPFS_NODE || 'ipfs.io';
+
 const state = {
   init: false,
   loading: false,
+  modalOpen: false,
   spaces: {}
 };
 
@@ -69,6 +71,9 @@ const actions = {
   loading: ({ commit }, payload) => {
     commit('SET', { loading: payload });
   },
+  toggleModal: ({ commit }) => {
+    commit('SET', { modalOpen: !state.modalOpen });
+  },
   getSpaces: async ({ commit }) => {
     let spaces: any = await client.request('spaces');
     spaces = Object.fromEntries(
@@ -115,15 +120,17 @@ const actions = {
       let proposals: any = await client.request(`${space.key}/proposals`);
       if (proposals) {
         const scores: any = await getScores(
+          space.key,
           space.strategies,
           space.network,
           getProvider(space.network),
           Object.values(proposals).map((proposal: any) => proposal.address)
         );
+        console.log('Scores', scores);
         proposals = Object.fromEntries(
           Object.entries(proposals).map((proposal: any) => {
             proposal[1].score = scores.reduce(
-              (a, b) => a + b[proposal[1].address],
+              (a, b) => a + (b[proposal[1].address] || 0),
               0
             );
             return [proposal[0], proposal[1]];
@@ -136,26 +143,25 @@ const actions = {
       commit('GET_PROPOSALS_FAILURE', e);
     }
   },
-  getProposal: async ({ commit }, payload) => {
+  getProposal: async ({ commit }, { space, id }) => {
     commit('GET_PROPOSAL_REQUEST');
     try {
-      const blockNumber = await getBlockNumber(
-        getProvider(payload.space.network)
-      );
+      const blockNumber = await getBlockNumber(getProvider(space.network));
       const result: any = {};
       const [proposal, votes] = await Promise.all([
-        ipfs.get(payload.id),
-        client.request(`${payload.space.key}/proposal/${payload.id}`)
+        ipfsGet(ipfsNode, id),
+        client.request(`${space.key}/proposal/${id}`)
       ]);
       result.proposal = formatProposal(proposal);
-      result.proposal.ipfsHash = payload.id;
+      result.proposal.ipfsHash = id;
       result.votes = votes;
       const { snapshot } = result.proposal.msg.payload;
       const blockTag = snapshot > blockNumber ? 'latest' : parseInt(snapshot);
       const scores: any = await getScores(
-        payload.space.strategies,
-        payload.space.network,
-        getProvider(payload.space.network),
+        space.key,
+        space.strategies,
+        space.network,
+        getProvider(space.network),
         Object.keys(result.votes),
         // @ts-ignore
         blockTag
@@ -164,7 +170,7 @@ const actions = {
       result.votes = Object.fromEntries(
         Object.entries(result.votes)
           .map((vote: any) => {
-            vote[1].scores = payload.space.strategies.map(
+            vote[1].scores = space.strategies.map(
               (strategy, i) => scores[i][vote[1].address] || 0
             );
             vote[1].balance = vote[1].scores.reduce((a, b: any) => a + b, 0);
@@ -186,7 +192,7 @@ const actions = {
             .reduce((a, b: any) => a + b.balance, 0)
         ),
         totalScores: result.proposal.msg.payload.choices.map((choice, i) =>
-          payload.space.strategies.map((strategy, sI) =>
+          space.strategies.map((strategy, sI) =>
             Object.values(result.votes)
               .filter((vote: any) => vote.msg.payload.choice === i + 1)
               .reduce((a, b: any) => a + b.scores[sI], 0)
@@ -209,6 +215,7 @@ const actions = {
       const blockNumber = await getBlockNumber(getProvider(space.network));
       const blockTag = snapshot > blockNumber ? 'latest' : parseInt(snapshot);
       let scores: any = await getScores(
+        space.key,
         space.strategies,
         space.network,
         getProvider(space.network),

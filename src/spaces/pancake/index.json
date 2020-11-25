@@ -1,5 +1,5 @@
 {
-  "token": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
+  "token": "0x4086D46A650517fa756F620507dB704D3900Da07",
   "name": "PancakeSwap",
   "network": "56",
   "symbol": "CAKEVOTE",
@@ -9,12 +9,12 @@
     {
       "name": "pancake",
       "params": {
-        "address": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
+        "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
         "chefAddresses": [
+          "0xFb1088Dae0f03C5123587d2babb3F307831E6367",
+          "0x4086D46A650517fa756F620507dB704D3900Da07",
           "0x9c4EBADa591FFeC4124A7785CAbCfb7068fED2fb",
-          "0xdc8c45b7F3747Ca9CaAEB3fa5e0b5FCE9430646b",
-          "0x90F995b9d46b32c4a1908A8c6D0122e392B3Be97",
-          "0x07a0A5B67136d40F4d7d95Bc8e0583bafD7A81b9"
+          "0x90F995b9d46b32c4a1908A8c6D0122e392B3Be97"
         ],
         "decimals": 18
       }

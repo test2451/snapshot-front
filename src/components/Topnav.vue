@@ -19,7 +19,7 @@
               <span
                 :class="space && 'hide-sm'"
                 class="mr-1"
-                v-text="'SyrupVote'"
+                v-text="'CakeVote'"
               />
               <span v-if="space" class="pl-1 pr-2 text-gray" v-text="'/'" />
             </router-link>
@@ -66,14 +66,16 @@
             </UiButton>
           </div>
         </div>
-        <ModalAccount
-          :open="modalOpen"
-          @close="modalOpen = false"
-          @login="handleLogin"
-        />
-        <ModalAbout :open="modalAboutOpen" @close="modalAboutOpen = false" />
       </Container>
     </nav>
+    <portal to="modal">
+      <ModalAccount
+        :open="modalOpen"
+        @close="modalOpen = false"
+        @login="handleLogin"
+      />
+      <ModalAbout :open="modalAboutOpen" @close="modalAboutOpen = false" />
+    </portal>
   </Sticky>
 </template>
 
