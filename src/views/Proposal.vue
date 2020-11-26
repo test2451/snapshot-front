@@ -212,8 +212,8 @@ export default {
       if (this.key === 'pancake') {
         return {
           ...this.app.spaces[this.key],
-          ...pancake,
-        }
+          ...pancake
+        };
       }
       return this.app.spaces[this.key];
     },
