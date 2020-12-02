@@ -92,6 +92,10 @@ const actions = {
                 "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
                 "chefAddresses": [
                 {
+                    "address": "0x1AD34D8d4D79ddE88c9B6b8490F8fC67831f2CAe",
+                    "decimals": 18
+                },
+                {
                     "address": "0xFb1088Dae0f03C5123587d2babb3F307831E6367",
                     "decimals": 18
                 },
@@ -108,10 +112,6 @@ const actions = {
                     "decimals": 18
                 },
                 {
-                    "address": "0x1AD34D8d4D79ddE88c9B6b8490F8fC67831f2CAe",
-                    "decimals": 18
-                },
-                {
                     "address": "0x42Afc29b2dEa792974d1e9420696870f1Ca6d18b",
                     "decimals": 6
                 }]
@@ -122,7 +122,20 @@ const actions = {
         {
             "defaultTab": "core",
             "minScore": 0,
-            "invalids": ["QmXAEfVnKwJordj7WQUeB3pdJ147jyRq99iGagKntijNsw", "QmfSUjMKSLgFzT8aQQcTfUK3HhUFY3E1K3mrAtt99waFJQ", "QmWCLxq1Ya4opwkSLU4v1zecsEH8C26pdG64VwW5WyXtqb", "QmTBdcBuYZi2wUrMuTmQgz4dmG13wGc8A6hXiszt9T7Lup", "QmZ3iPtLRKzq6Wk1MSsmUg6uKuqFGjdGVX1TTjdvHSZwUz", "Qmeg1BDH838deKqN2baoNE6rePkkXqLy3cujLyNTdmCLsF", "QmeiB2PtRBtk9XDk9LAWuCPH2Thp67tKqHPmGdc1oNiDm6", "QmcoGEX52GaGM2sJC2EKZgNuxRxjfeiotn1kVnApcgBJnq"]
+            "invalids": [
+              "QmXAEfVnKwJordj7WQUeB3pdJ147jyRq99iGagKntijNsw",
+              "QmfSUjMKSLgFzT8aQQcTfUK3HhUFY3E1K3mrAtt99waFJQ",
+              "QmWCLxq1Ya4opwkSLU4v1zecsEH8C26pdG64VwW5WyXtqb",
+              "QmTBdcBuYZi2wUrMuTmQgz4dmG13wGc8A6hXiszt9T7Lup",
+              "QmZ3iPtLRKzq6Wk1MSsmUg6uKuqFGjdGVX1TTjdvHSZwUz",
+              "Qmeg1BDH838deKqN2baoNE6rePkkXqLy3cujLyNTdmCLsF",
+              "QmeiB2PtRBtk9XDk9LAWuCPH2Thp67tKqHPmGdc1oNiDm6",
+              "QmcoGEX52GaGM2sJC2EKZgNuxRxjfeiotn1kVnApcgBJnq",
+              "QmZ567dsaYWYoJEPvJHefWqpiTdFJQHYt4aW4eVxceoKVe",
+              "QmQJNEM62hNLFyLweY7r58Vc2E563DfMQMYif595zp1dsr",
+              "QmW5VcH3PiMQ9jn3hLb8QaJi6zAWm5meBcnRF7KtBZ6RaK",
+              "QmTM95ep6PTgRQWD7H5nHcRqPP63zhrvkrGVFGaq7MRzyP"
+            ]
         }
     }}
     spaces = Object.fromEntries(
