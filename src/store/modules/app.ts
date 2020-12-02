@@ -108,8 +108,8 @@ const actions = {
                     "decimals": 18
                 },
                 {
-                  "address": "0x1AD34D8d4D79ddE88c9B6b8490F8fC67831f2CAe",
-                  "decimals": 18
+                    "address": "0x1AD34D8d4D79ddE88c9B6b8490F8fC67831f2CAe",
+                    "decimals": 18
                 },
                 {
                     "address": "0x42Afc29b2dEa792974d1e9420696870f1Ca6d18b",
