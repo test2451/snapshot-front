@@ -113,7 +113,7 @@ const actions = {
                 },
                 {
                     "address": "0x42Afc29b2dEa792974d1e9420696870f1Ca6d18b",
-                    "decimals": 6
+                    "decimals": 18
                 }]
             }
         }],
@@ -134,7 +134,9 @@ const actions = {
               "QmZ567dsaYWYoJEPvJHefWqpiTdFJQHYt4aW4eVxceoKVe",
               "QmQJNEM62hNLFyLweY7r58Vc2E563DfMQMYif595zp1dsr",
               "QmW5VcH3PiMQ9jn3hLb8QaJi6zAWm5meBcnRF7KtBZ6RaK",
-              "QmTM95ep6PTgRQWD7H5nHcRqPP63zhrvkrGVFGaq7MRzyP"
+              "QmTM95ep6PTgRQWD7H5nHcRqPP63zhrvkrGVFGaq7MRzyP",
+              "QmdW7JBkD6T8rSQ3KhNrW7gZ1TS31J32FrKW3GEnktwWLq",
+              "QmNRLyxrGeKFQ4uy3YbA9B4SKQicYHVqwFm4QfeK8qBL5h"
             ]
         }
     }}
