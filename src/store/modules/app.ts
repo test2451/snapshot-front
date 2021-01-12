@@ -101,7 +101,7 @@ const actions = {
                 },
                 {
                   "address": "0x624ef5C2C6080Af188AF96ee5B3160Bb28bb3E02",
-                  "decimals": 9
+                  "decimals": 18
                 },
                 {
                   "address": "0x108BFE84Ca8BCe0741998cb0F60d313823cEC143",
@@ -117,19 +117,19 @@ const actions = {
                 },
                 {
                   "address": "0xd18E1AEb349ef0a6727eCe54597D98D263e05CAB",
-                  "decimals": 2
+                  "decimals": 18
                 },
                 {
                   "address": "0xbE65d7e42E05aD2c4ad28769dc9c5b4b6EAff2C7",
-                  "decimals": 2
+                  "decimals": 18
                 },
                 {
                   "address": "0x543467B17cA5De50c8BF7285107A36785Ab57E56",
-                  "decimals": 2
+                  "decimals": 18
                 },
                 {
                   "address": "0x65aFEAFaec49F23159e897EFBDCe19D94A86A1B6",
-                  "decimals": 2
+                  "decimals": 18
                 }]
             }
         }],
