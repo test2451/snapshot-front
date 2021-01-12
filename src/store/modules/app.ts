@@ -92,28 +92,44 @@ const actions = {
                 "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
                 "chefAddresses": [
                 {
-                    "address": "0x1AD34D8d4D79ddE88c9B6b8490F8fC67831f2CAe",
-                    "decimals": 18
+                  "address": "0x0554a5D083Abf2f056ae3F6029e1714B9A655174",
+                  "decimals": 18
                 },
                 {
-                    "address": "0xFb1088Dae0f03C5123587d2babb3F307831E6367",
-                    "decimals": 18
+                  "address": "0x1500fa1afbfe4f4277ed0345cdf12b2c9ca7e139",
+                  "decimals": 18
                 },
                 {
-                    "address": "0x9c4EBADa591FFeC4124A7785CAbCfb7068fED2fb",
-                    "decimals": 18
+                  "address": "0x624ef5C2C6080Af188AF96ee5B3160Bb28bb3E02",
+                  "decimals": 9
                 },
                 {
-                    "address": "0x90F995b9d46b32c4a1908A8c6D0122e392B3Be97",
-                    "decimals": 18
+                  "address": "0x108BFE84Ca8BCe0741998cb0F60d313823cEC143",
+                  "decimals": 18
                 },
                 {
-                    "address": "0x326D754c64329aD7cb35744770D56D0E1f3B3124",
-                    "decimals": 18
+                  "address": "0x4A26b082B432B060B1b00A84eE4E823F04a6f69a",
+                  "decimals": 18
                 },
                 {
-                    "address": "0x42Afc29b2dEa792974d1e9420696870f1Ca6d18b",
-                    "decimals": 18
+                  "address": "0x3cc08B7C6A31739CfEd9d8d38b484FDb245C79c8",
+                  "decimals": 18
+                },
+                {
+                  "address": "0xd18E1AEb349ef0a6727eCe54597D98D263e05CAB",
+                  "decimals": 2
+                },
+                {
+                  "address": "0xbE65d7e42E05aD2c4ad28769dc9c5b4b6EAff2C7",
+                  "decimals": 2
+                },
+                {
+                  "address": "0x543467B17cA5De50c8BF7285107A36785Ab57E56",
+                  "decimals": 2
+                },
+                {
+                  "address": "0x65aFEAFaec49F23159e897EFBDCe19D94A86A1B6",
+                  "decimals": 2
                 }]
             }
         }],
