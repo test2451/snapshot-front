@@ -19,7 +19,7 @@
               <span
                 :class="space && 'hide-sm'"
                 class="mr-1"
-                v-text="'CakeVote'"
+                v-text="'PieVote'"
               />
               <span v-if="space" class="pl-1 pr-2 text-gray" v-text="'/'" />
             </router-link>
@@ -92,7 +92,7 @@ export default {
   },
   computed: {
     space() {
-      const key = 'pancake';
+      const key = 'pie';
       return this.app.spaces[key] ? this.app.spaces[key] : false;
     }
   },
