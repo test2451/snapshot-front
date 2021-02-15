@@ -28,7 +28,7 @@ export default {
   computed: {
     space() {
       try {
-        const key = 'pancake';
+        const key = 'pie';
         return this.app.spaces[key];
       } catch (e) {
         return {};
